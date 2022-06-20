@@ -4,7 +4,7 @@ class Solution {
         return helper(num,0);
     }
     
-    public int helper(int num, int steps){
+    private int helper(int num, int steps){
         if(num == 0){
             return steps;
         }
