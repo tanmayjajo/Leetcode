@@ -15,9 +15,8 @@ class GFG {
 		    int n = sc.nextInt();
 		    int[] arr = new int[n];
 		    while(n-->0){
-		        arr[arr.length - n - 1] = sc.nextInt();
+		        arr[n] = sc.nextInt();
 		    }
-		    rev(arr, 0, arr.length - 1);
 		    for (int element : arr){
 		        System.out.print(element + " ");
 		    }
@@ -25,17 +24,4 @@ class GFG {
 		}
 		return;
 	}
-	
-	private static void rev(int[] arr, int start, int end){
-	    if(start >= end){
-	        return;
-	    }
-	    int temp = arr[start];
-	    arr[start] = arr[end];
-	    arr[end] = temp;
-	    
-	    rev(arr, start + 1, end - 1);
-	}
-	
-	
 }
