@@ -5,6 +5,18 @@ import java.lang.*;
 import java.io.*;
 
 class GFG {
+    private static int[] arr = new int[10];
+    
+	private static int f(int a, int b, int c, int n){
+	    arr[0] = a;
+	    arr[1] = b;
+	    arr[2] = c;
+	    for(int i = 3; i < n; i++){
+	        arr[i] = arr[i - 1] + arr[i -2] + arr[i -3];
+	    }
+	    return arr[n-1];
+	}
+
 	public static void main (String[] args) {
 		//code
 		Scanner sc = new Scanner(System.in);
@@ -20,12 +32,6 @@ class GFG {
 		}
 		
 	}
-	private static int f(int a, int b, int c, int n){
-	    if(n==1) return a;
-	    if(n==2) return b;
-	    if(n==3) return c;
-	    
-	    return f(a, b, c, n-1)+f(a, b, c, n-2)+f(a, b, c, n-3);
-	}
 	
+		
 }
