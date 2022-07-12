@@ -23,10 +23,10 @@ class Solution {
         
         list.add(root.val);
         if(root.left != null){
-            helper(root.left);
+            preorderTraversal(root.left);
         }
         if(root.right != null){
-            helper(root.right);
+            preorderTraversal(root.right);
         }
     }
     public List<Integer> preorderTraversal(TreeNode root) {
