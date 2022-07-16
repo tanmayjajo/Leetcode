@@ -14,25 +14,27 @@
  * }
  */
 class Solution {
-    
-    List<Integer> list = new ArrayList<>();
-    public void helper(TreeNode root){
-        if(root==null){
-            return;
+    public List<Integer> postorderTraversal(TreeNode root) {
+        Stack<TreeNode> st1 = new Stack<>();
+        Stack<TreeNode> st2 = new Stack<>();
+        
+        List<Integer> list = new ArrayList<>();
+        
+        if(root == null) return list;
+        
+        st1.push(root);
+        
+        
+        while(!st1.empty()){
+            st2.push(st1.pop());
+            TreeNode curr = st2.peek();
+            if(curr.left != null) st1.push(curr.left);
+            if(curr.right != null) st1.push(curr.right);
         }
         
-       
-        if(root.left != null){
-            postorderTraversal(root.left);
+        while(!st2.empty()){
+            list.add(st2.pop().val);
         }
-        if(root.right != null){
-            postorderTraversal(root.right);
-        }
-        list.add(root.val);
-    }
-    
-    public List<Integer> postorderTraversal(TreeNode root) {
-        helper(root);
         return list;
     }
 }
