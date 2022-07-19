@@ -13,7 +13,7 @@ class Solution {
             }
         }
         
-        return pQueue.poll();
+        return pQueue.peek();
         
     }
 }
