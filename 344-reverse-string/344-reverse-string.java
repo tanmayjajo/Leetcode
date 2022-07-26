@@ -1,16 +1,14 @@
 class Solution {
     public void reverseString(char[] s) {
-        rev(s, 0, s.length - 1);
-        return;
-        
+        helper(s,0,s.length-1);
     }
-    public void rev(char[] s, int i, int j){
-        if(i>j){
-            return;
-        }
+    
+    public void helper(char[] s, int i, int j){
+        if(i>=j) return;
         char temp = s[i];
         s[i] = s[j];
         s[j] = temp;
-        rev(s, ++i, --j);
+        
+        helper(s,++i,--j);
     }
 }
