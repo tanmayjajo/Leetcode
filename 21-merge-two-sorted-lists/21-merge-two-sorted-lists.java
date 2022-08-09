@@ -14,12 +14,6 @@ class Solution {
         if (temp1 == null && temp2 == null) {
             return null;
         }
-        if (temp1 == null) {
-            return temp2;
-        }
-        if (temp2 == null) {
-            return temp1;
-        }
         
         ListNode ans = new ListNode(0);
         
