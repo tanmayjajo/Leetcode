@@ -1,11 +1,5 @@
-SELECT employee_id 
-FROM Employees
-WHERE employee_id NOT IN (SELECT employee_id FROM Salaries)
-
-UNION
-
-SELECT employee_id 
-FROM Salaries
-WHERE employee_id NOT IN (SELECT employee_id FROM Employees)
-
-ORDER BY employee_id ASC;
+SELECT EM.employee_id 
+FROM (SELECT employee_ID FROM Employees UNION ALL SELECT employee_id FROM Salaries) AS EM
+GROUP BY EM.employee_id 
+HAVING COUNT(EM.employee_id) = 1
+ORDER BY EM.employee_id 
