@@ -1,4 +1,7 @@
 class Solution {
+    
+    // use two pointers, whenever you find a non zero number then swap it with current pointer and increment the pointer.
+    // this way all the non zeroes will be at the starting and zeroes will go to the end automatically in one traversal
     public void moveZeroes(int[] nums) {
         
         int i = 0;
