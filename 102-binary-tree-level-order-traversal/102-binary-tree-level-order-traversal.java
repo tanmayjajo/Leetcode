@@ -16,7 +16,7 @@
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
         
-        // this is the final 2-D Matrix to be returned
+        // this is the final 2-D Matrix to be returned aka finalList
         List<List<Integer>> ans = new ArrayList<List<Integer>>();
         
         
@@ -57,10 +57,10 @@ class Solution {
                     queue.add(temp.right);
                 }
                 
-                list.add(temp.val);
+                list.add(temp.val); // adding all values of a level to list
             }
             
-            ans.add(list);
+            ans.add(list); // adding list containing one level in the finalList
         }
         
         return ans;
