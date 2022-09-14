@@ -11,12 +11,14 @@
  */
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        int L1 = len(headA);
+        // find l1, l2
+        int L1 = len(headA); 
         int L2 = len(headB);
         
         ListNode temp1 = headA;
         ListNode temp2 = headB;
         
+        // acc of difference of l1 and l2, increase the pointer with greater L
         if(L1>L2){
             for(int i = 0; i < L1-L2; i++){
                 temp1=temp1.next;
@@ -28,6 +30,7 @@ public class Solution {
             }
         }
         
+        // linear traversal and booom
         while(temp1!=null || temp2!=null){
             if(temp1==temp2){
                 return temp1;
