@@ -9,18 +9,16 @@
  * }
  */
 class Solution {
-    public ListNode swapPairs(ListNode head) {
-        ListNode temp = head;
-        while(temp!=null && temp.next!=null){
-            swap(temp);
-            temp = temp.next.next;
+    public ListNode swapPairs(ListNode head){
+        // this recursive solution is not changing values inside the nodes, it is changing the connections between nodes
+        
+        if(head==null || head.next==null){
+            return head;
         }
-        return head;
-    }
-    public void swap(ListNode root){
-        if(root.next==null)return;
-        int c = root.val;
-        root.val = root.next.val;
-        root.next.val = c;
+        ListNode aage = head.next;
+        aage.next = swapPairs(head.next.next);
+        head.next = aage.next;
+        aage.next = head;
+        return aage;
     }
 }
