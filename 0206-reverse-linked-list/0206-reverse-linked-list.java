@@ -10,10 +10,21 @@
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
-        if(head == null || head.next == null) return head;
-        ListNode ans = reverseList(head.next);
-        head.next.next = head;
-        head.next = null;
-        return ans;
+        if(head == null) return head; //handling corner case
+        ListNode prev = null;
+        ListNode curr = head;
+        ListNode Next = head.next;
+        
+        while(Next!=null){
+            curr.next = prev; // linking to prev node
+            
+						//shifting pointers
+            prev = curr;
+            curr = Next;
+            Next = Next.next;
+        }
+        curr.next = prev; //Last node of list, becoming first node of reversed Linked List
+
+        return curr;
     }
 }
