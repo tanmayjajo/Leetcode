@@ -12,6 +12,7 @@ class Solution {
             }
             if(nums[i] > target && nums[i-1] == target){
                 ans[1] = i-1;
+                break;
             }
         }
         if(nums[nums.length - 1] == target) ans[1] = nums.length - 1;
