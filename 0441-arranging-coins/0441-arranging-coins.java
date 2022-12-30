@@ -1,11 +1,12 @@
 class Solution {
+    
+    // This problem can be reduced down to:
+    // (K * (K+1))/2 <= N
+    // K^2 + K <= 2*N
+    // (K + 1/2)^2 <= 2*N + 1/4
+    // K <= sqrt(2*N + 1/4) - 1/2
+    
     public int arrangeCoins(int n) {
-        long k = 0;
-        long ans = 0;
-        while(k*(k+1) <= 2*1l*n){
-            ans = k;
-            k++;
-        }
-        return (int)(ans);
+       return (int)(Math.sqrt(2* (long)n + 0.25) - 0.5 );
     }
 }
