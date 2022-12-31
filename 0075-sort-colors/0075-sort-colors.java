@@ -1,18 +1,26 @@
 class Solution {
     public void sortColors(int[] nums) {
-        int i = 0;
-        int j = nums.length - 1; 
-        int k = 0;
-        while(k<=j){
-            if(nums[k] == 0){
-                swap(nums, i, k);
-                if(nums[k] == 0) k++;
-                i++;
-            }else if(nums[k] == 2){
-                swap(nums, j, k);
-                j--;
-            }else if(nums[k]==1){
-                k++;
+        // tracker of zeroes
+        int z = 0; 
+    
+        // tracker of twos
+        int t = nums.length - 1; 
+    
+        // pointer for one traversal
+        int p = 0;
+    
+    
+        // here we are not keeping any pointer for tracking 1s because it will take care of itself
+        while(p<=t){
+            if(nums[p] == 0){
+                swap(nums, z, p);
+                if(nums[p] == 0) p++;
+                z++;
+            }else if(nums[p] == 2){
+                swap(nums, t, p);
+                t--;
+            }else if(nums[p]==1){
+                p++;
             }
         }
         
