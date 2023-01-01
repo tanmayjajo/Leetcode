@@ -4,33 +4,61 @@ class Solution {
             return "";
         }
 
-        int n = s.length();
-        String result = "";
+        // Preprocess the string to handle even length palindromes
+        String t = preprocess(s);
+        int n = t.length();
+        int[] p = new int[n];
+        int c = 0;
+        int r = 0;
 
-        for (int i = 0; i < n; i++) {
-            // Odd length palindromes
-            String odd = expandAroundCenter(s, i, i);
-            if (odd.length() > result.length()) {
-                result = odd;
+        for (int i = 1; i < n - 1; i++) {
+            int mirror = 2 * c - i;
+
+            // Update p[i] using p[mirror]
+            p[i] = (r > i) ? Math.min(r - i, p[mirror]) : 0;
+
+            // Attempt to expand palindrome centered at i
+            while (t.charAt(i + 1 + p[i]) == t.charAt(i - 1 - p[i])) {
+                p[i]++;
             }
 
-            // Even length palindromes
-            String even = expandAroundCenter(s, i, i + 1);
-            if (even.length() > result.length()) {
-                result = even;
+            // Update c and r if palindrome centered at i expands past r
+            if (i + p[i] > r) {
+                c = i;
+                r = i + p[i];
             }
         }
 
-        return result;
+        // Find the longest palindromic substring
+        int maxLen = 0;
+        int centerIndex = 0;
+        for (int i = 1; i < n - 1; i++) {
+            if (p[i] > maxLen) {
+                maxLen = p[i];
+                centerIndex = i;
+            }
+        }
+
+        // Calculate the start and end indices of the longest palindromic substring
+        int start = (centerIndex - 1 - maxLen) / 2;
+        int end = start + maxLen;
+
+        return s.substring(start, end);
     }
 
-    private String expandAroundCenter(String s, int left, int right) {
-        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
-            left--;
-            right++;
+    // Preprocess the string to handle even length palindromes
+    private String preprocess(String s) {
+        int n = s.length();
+        if (n == 0) {
+            return "^$";
         }
-
-        // Substring excludes the last invalid character
-        return s.substring(left + 1, right);
+        StringBuilder sb = new StringBuilder();
+        sb.append("^");
+        for (int i = 0; i < n; i++) {
+            sb.append("#");
+            sb.append(s.charAt(i));
+        }
+        sb.append("#$");
+        return sb.toString();
     }
 }
