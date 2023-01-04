@@ -10,11 +10,11 @@ class Solution {
                 map.put(tasks[i], map.get(tasks[i]) + 1);
             }
         }
-        for(Map.Entry<Integer, Integer> entry: map.entrySet()){
-            if(entry.getValue() == 1) return -1;
+        for(int value: map.values()){
+            if(value == 1) return -1;
             
-            count += (entry.getValue())/3;
-            if(entry.getValue()%3 != 0) count++;
+            count += (value)/3;
+            if(value%3 != 0) count++;
         }
             
         return count;
