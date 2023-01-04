@@ -12,22 +12,10 @@ class Solution {
         }
         if(map.values().contains(1)) return -1;
         
-    
-        
-        while(Collections.frequency(map.values(), 0) != map.size()){
-            for(Map.Entry<Integer, Integer> entry: map.entrySet()){
-                if(entry.getValue() == 0){
-                
-                }else if(entry.getValue() <= 3){
-                    count++;
-                    map.put(entry.getKey(), 0);
-                }else {
-                    map.put(entry.getKey(), entry.getValue() - 3);
-                    count++;
-                }
-            }
+        for(Map.Entry<Integer, Integer> entry: map.entrySet()){
+            count += (entry.getValue() + 2)/3;
         }
-        
+            
         return count;
     }
 }
