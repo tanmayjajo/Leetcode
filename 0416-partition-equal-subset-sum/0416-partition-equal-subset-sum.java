@@ -5,30 +5,29 @@ class Solution {
             totalSum += i;
         }
         if((totalSum&1) == 1) return false;
+        
         int Smax = totalSum/2;
-        int[][] dp = new int[nums.length+5][Smax+5];
-       
-        Arrays.stream(dp).forEach(a-> Arrays.fill(a, -1));
         
-        int ans = helper(nums, nums.length - 1, Smax, dp);
-        
-        if(ans == Smax){
-            return true;
+        boolean[][] t = new boolean[nums.length][Smax+1];
+        for(int j = 0; j < Smax+1; j++){
+            t[0][j] = false;
         }
-        return false;
+        for(int i =0; i < nums.length; i++){
+            t[i][0] = true;
+        }
+        
+        
+        for(int i = 1; i < nums.length; i++){
+            for(int j = 0; j < Smax+1; j++){
+                if(nums[i-1] <= j){
+                    t[i][j] = t[i-1][j-nums[i-1]] || t[i-1][j];
+                }else{
+                    t[i][j] = t[i-1][j];
+                }
+            }
+        }
+        return t[nums.length-1][Smax];
     }
-    public int helper(int[] nums, int i, int Smax, int[][] dp){
-        if(Smax==0)return 0;
-        if(i < 0) return 0;
-        
-        if(dp[i][Smax] != -1){
-            return dp[i][Smax];
-        }
-        
-        if(nums[i] > Smax){
-            return dp[i][Smax] = helper(nums, i-1, Smax, dp);
-        }
-        
-        return dp[i][Smax] = Math.max(helper(nums, i-1, Smax-nums[i], dp) + nums[i], helper(nums, i-1, Smax, dp));
-    }
+    
+    
 }
