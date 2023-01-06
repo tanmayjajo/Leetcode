@@ -16,24 +16,41 @@ class Solution {
             size++;
             temp = temp.next;
         }
-        if(size <= 1) return head;
+        if(size < 2) return head;
         k = k%size;
-        temp = head;
-        ListNode temp2 = head;
+        if(k == 0) return head;
         
-        for(int i = 0; i < size - k-1; i++){
+        
+        
+        head = rotate(head);
+        temp = head;
+        while(k-->1){
             temp = temp.next;
         }
-        if(temp.next == null) return head; // to avoid complete rotation
-    
-        head = temp.next;
+        ListNode temp2 = temp.next;
         temp.next = null;
+        head = rotate(head);
         temp = head;
         while(temp.next!=null){
             temp = temp.next;
         }
-        temp.next = temp2;
-        System.out.println(size);
+        temp.next = rotate(temp2);
+        
+        return head;
+    }
+    public ListNode rotate(ListNode head){
+        ListNode temp = head;
+        ArrayList<Integer> list = new ArrayList<>();
+        while(temp!=null){
+            list.add(temp.val);
+            temp = temp.next;
+        }
+        temp = head;
+        while(temp!=null){
+            temp.val = list.remove(list.size() - 1);
+            temp = temp.next;
+        }
+        
         return head;
     }
 }
