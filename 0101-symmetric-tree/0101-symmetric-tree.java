@@ -15,32 +15,11 @@
  */
 class Solution {
     public boolean isSymmetric(TreeNode root) {
-        Stack<TreeNode> st = new Stack<>();
-        
-        st.push(root.left);
-        st.push(root.right);
-        
-        
-        while(!st.isEmpty()){
-            TreeNode n1 = st.pop();
-            TreeNode n2 = st.pop();
-            
-            if(n1 == null && n2 == null) continue;
-            if(n1 == null || n2 == null || n1.val != n2.val) return false;
-            
-            st.push(n1.left);
-            st.push(n2.right);
-            st.push(n1.right);
-            st.push(n2.left);
-            
-        }
-        
-        
-        return true;
-        
+        return helper(root.left, root.right);
     }
-    
-    
-    
-    
+    public boolean helper(TreeNode n1, TreeNode n2){
+        if(n1==null && n2==null) return true;
+        if(n1==null || n2==null || n1.val!=n2.val) return false;
+        return helper(n1.left, n2.right) && helper(n1.right, n2.left);
+    }
 }
