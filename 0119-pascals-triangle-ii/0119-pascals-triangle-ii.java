@@ -10,16 +10,16 @@ class Solution {
             ls.add(1);
             for(int j = 1; j < i-1; j++){
                 if(j < i-1){
-                    int a = list.get(i-2).get(j-1);
-                    int b = list.get(i-2).get(j);
+                    int a = list.get(0).get(j-1);
+                    int b = list.get(0).get(j);
                     ls.add(a+b);
                 }
             }
             if(i!=1) ls.add(1);
             list.add(new ArrayList<Integer>(ls));
+            if(list.size()!= 1) list.remove(0);
         }
         
-        return list.get(list.size() - 1);
-        
+        return list.get(0);
     }
 }
