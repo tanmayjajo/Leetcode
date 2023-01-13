@@ -1,50 +1,24 @@
 class Solution {
     public List<String> generateParenthesis(int n) {
-        Stack<Character> st = new Stack<>();
-        StringBuilder str = new StringBuilder();
-        
         List<String> list = new ArrayList<>();
         
-        helper(list, st, str, 2*n, n);
+        helper(list, "", 0, 0, n);
         
         return list;
     }
     
-    public void helper(List<String> list, Stack<Character> st, StringBuilder str, int n, int count){
-        if(n == 0){
-            list.add(str.toString());
-            return;
-        }
-        if(st.size() == 0) {
-            st.push('(');
-            str.append('(');
-            
-            helper(list, st, str, n-1, count -1);
-            str.deleteCharAt(str.length() - 1);
-            st.pop();
+    public void helper(List<String> list, String str, int open, int close, int max){
+        if(str.length() == max*2){
+            list.add(str);
             return;
         }
         
-        
-        if(count>0){
-            str.append('(');
-            st.push('(');
-            helper(list, st, str, n-1, count -1);
-            st.pop();
-            
-            // System.out.println( "Before deleting" + str.toString());
-            str.deleteCharAt(str.length() - 1);
-            // System.out.println( "After deleting" +str.toString());
+        if(open < max){
+            helper(list, str + "(", open+1, close, max);
         }
         
-        
-        if(st.peek() == '('){
-            str.append(')');
-            st.pop();
-            helper(list, st, str, n-1, count);
-            st.push('(');
-            str.deleteCharAt(str.length() - 1);
-        
+        if(close < open){
+            helper(list, str + ")", open, close + 1, max);
         }
         
     }
