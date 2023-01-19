@@ -2,6 +2,7 @@ class Solution {
 public:
     int climbStairs(int n) {
         if(n<3) return n;
+        
         int arr[n+1];
         arr[1] = 1;
         arr[2] = 2;
