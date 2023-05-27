@@ -8,14 +8,13 @@ public:
         int start = 0;
         
         for(int end = 0; end < n; end++){
-            if(m[s[end]] == 0){
-                ans = max(ans, end - start + 1);
-            }else{
-                while(m[s[end]] > 0){  
-                    m[s[start++]]--;
-                }
-            }
             m[s[end]]++;
+            
+            while(m[s[end]] > 1){
+                m[s[start++]]--;
+            }
+            
+            ans = max(ans, end - start + 1);
         }
         
         return ans;
