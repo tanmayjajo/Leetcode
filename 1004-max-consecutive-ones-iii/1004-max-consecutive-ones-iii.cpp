@@ -2,28 +2,20 @@ class Solution {
 public:
     int longestOnes(vector<int>& nums, int k) {
         int n = nums.size(), start = 0, ans = 0;
+        vector<int> freq(2);
         
-        int len = 0;
         for(int end = 0; end < n; end++){
+            // adding in window
+            freq[nums[end]]++;
+            
             // removing from window
-            while(k == 0 && nums[end] == 0){
-                if(nums[start] == 0) k++;
-                len--;
+            while(freq[0] > k){
+                freq[nums[start]]--;
                 start++;
             }
             
-            // adding in window
-            if(nums[end] == 1){
-                len++;
-            }else if(nums[end] == 0 && k>0){
-                k--;
-                len++;
-            }
-            
             // considering the valid window
-            ans = max(len, ans);
-            
-            
+            ans = max(ans, end - start + 1);
         }
         
         return ans;
