@@ -1,35 +1,51 @@
 class Solution {
 public:
-    
-    void dfs(int src, vector<vector<int>> &adj, vector<int> &vis){
-        vis[src] = 1;
+    void bfs(int i, vector<vector<int>> &adjList, vector<int> &vis){
+        queue<int> q;
         
-        for(auto &child: adj[src]){
-            if(vis[child] == 0){
-                dfs(child, adj, vis);
+        q.push(i);
+        vis[i] = 1;
+        
+        while(q.size()){
+            int boom = q.front();
+            for(int i = 0; i < adjList[boom].size(); i++){
+                int ele = adjList[boom][i];
+                if(vis[ele] == 0){
+                    vis[ele] = 1;
+                    q.push(ele);
+                }
             }
+            q.pop();
         }
     }
     
     int findCircleNum(vector<vector<int>>& isConnected) {
-        int V = isConnected.size();
+        int n = isConnected.size();
+        vector<vector<int>> adjList(n);
         
-        vector<vector<int>> adj(V);
-        for(int i = 0; i < V; i++){
-            for(int j = 0; j < V; j++){
-                if(isConnected[i][j] == 1) adj[i].push_back(j);
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
+                if(i != j && isConnected[i][j]) adjList[i].push_back(j);
             }
         }
         
-        vector<int> vis(V, 0);
-        int count = 0;
+//         for(int i = 0; i < n; i++){
+//             cout << i+1 << ":=> ";
+//             for(auto j: adjList[i]) cout << j +1 << " ";
+//             cout << endl;
+//         }
         
-        for(int i = 0; i < V; i++){
+        
+        int count = 0;
+        vector<int> vis(n, 0);
+        
+        for(int i = 0; i < n; i++){
             if(vis[i] == 0){
                 count++;
-                dfs(i, adj, vis);
+                bfs(i, adjList, vis);
             }
         }
+        
         return count;
     }
 };
