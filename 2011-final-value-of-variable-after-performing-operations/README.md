@@ -10,7 +10,7 @@
 <p>Given an array of strings <code>operations</code> containing a list of operations, return <em>the <strong>final </strong>value of </em><code>X</code> <em>after performing all the operations</em>.</p>
 
 <p>&nbsp;</p>
-<p><strong>Example 1:</strong></p>
+<p><strong class="example">Example 1:</strong></p>
 
 <pre><strong>Input:</strong> operations = ["--X","X++","X++"]
 <strong>Output:</strong> 1
@@ -21,7 +21,7 @@ X++: X is incremented by 1, X = -1 + 1 =  0.
 X++: X is incremented by 1, X =  0 + 1 =  1.
 </pre>
 
-<p><strong>Example 2:</strong></p>
+<p><strong class="example">Example 2:</strong></p>
 
 <pre><strong>Input:</strong> operations = ["++X","++X","X++"]
 <strong>Output:</strong> 3
@@ -32,7 +32,7 @@ Initially, X = 0.
 X++: X is incremented by 1, X = 2 + 1 = 3.
 </pre>
 
-<p><strong>Example 3:</strong></p>
+<p><strong class="example">Example 3:</strong></p>
 
 <pre><strong>Input:</strong> operations = ["X++","++X","--X","X--"]
 <strong>Output:</strong> 0
