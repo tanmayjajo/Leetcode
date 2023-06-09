@@ -10,30 +10,52 @@
  */
 class Solution {
 public:
+    ListNode* reverse(ListNode* head){
+        if(!head || !head->next) return head;
+        
+        ListNode* temp = NULL;
+        ListNode* temp1 = head;
+        ListNode* temp2 = head;
+        
+        while(temp1 && temp2){
+            temp2 = temp1->next;
+            temp1->next = temp;
+            
+            temp = temp1;
+            temp1 = temp2;
+        }
+        
+        return temp;
+    }
+    
     void reorderList(ListNode* head) {
-        ListNode* temp = head;
-        int sz = 0;
-        while(temp){
-            temp = temp->next;
-            sz++;
+        if(head == NULL || head->next == NULL) return;
+        
+        ListNode* slow = head;
+        ListNode* fast = head;
+        
+        while(fast && fast->next && fast->next->next){
+            fast = fast->next->next;
+            slow = slow->next;
         }
         
-        temp = head;
-        int arr[sz];
-        for(int i = 0; i < sz; i++){
-            arr[i] = temp->val;
-            temp = temp->next;
-        }
-        int s = 0, e = sz-1;
+        ListNode* l2 = reverse(slow->next);
+        slow->next = NULL;
         
-        temp = head;
-        for(int i = 0; i < sz; i++){
-            if(i%2==0){
-                temp->val = arr[s++];
-            }else{
-                temp->val = arr[e--];
-            }
-            temp = temp->next;
+        ListNode* l1 = head;
+        
+        ListNode* l3 = l1;
+        ListNode* l4 = l2;
+        
+        while(l1 && l2){
+            l3 = l3->next;
+            l4 = l4->next;
+            
+            l1->next = l2;
+            l2->next = l3;
+            
+            l1 = l3;
+            l2 = l4;
         }
     }
 };
