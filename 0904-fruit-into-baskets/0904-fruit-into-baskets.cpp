@@ -1,27 +1,24 @@
 class Solution {
 public:
     int totalFruit(vector<int>& fruits) {
-        int n = fruits.size();
-        unordered_map<int, int> m;
+        int ans = 0; // will store max len
         
-        int maxLen = 0;
-        int start = 0;
+        unordered_map<int, int> m; // fruit and its freq
+        int s = 0; // starting pointer of window
         
-        for(int end = 0; end < n; end++){
-            // adding in window
-            m[fruits[end]]++;
+        for(int e = 0; e < fruits.size(); e++){
+            // expanding the window
+            m[fruits[e]]++;
             
-            // removing from window
-            while(m.size() > 2){
-                m[fruits[start]]--;
-                if(m[fruits[start]] == 0) m.erase(fruits[start]);
-                start++;
+            // contracting the window
+            while(m.size()>2){
+                m[fruits[s]]--;
+                if(m[fruits[s]] == 0) m.erase(fruits[s]);
+                s++;
             }
             
-            // considering a valid window
-            maxLen = max(maxLen, end - start + 1);
+            ans = max(ans, e-s+1);
         }
-        
-        return maxLen;
+        return ans;
     }
 };
