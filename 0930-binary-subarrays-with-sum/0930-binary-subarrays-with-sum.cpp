@@ -1,23 +1,27 @@
 class Solution {
 public:
-    int f(vector<int>& nums, int goal){
+    // will give me count of all subarrays with sum 
+    // less than equal to Goal
+    
+    int count(vector<int>& nums, int goal){
         if(goal < 0) return 0;
+        int n = nums.size();
+        int l = 0, r = 0;
+        int count = 0;
         
-        int ans = 0;
-        int left = 0;
-        for(int right = 0; right < nums.size(); right++){
-            goal -= nums[right];
+        for(int r = 0; r < n; r++){
+            goal -= nums[r];
             
             while(goal < 0){
-                goal += nums[left];
-                left++;
+                goal += nums[l];
+                l++;
             }
-            ans += right - left + 1;
+            count += r-l+1;
         }
-        
-        return ans;
+        return count;
     }
+    
     int numSubarraysWithSum(vector<int>& nums, int goal) {
-        return f(nums, goal) - f(nums, goal-1);
+        return count(nums, goal) - count(nums, goal-1);
     }
 };
